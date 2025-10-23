@@ -19,7 +19,6 @@ import in.tech_camp.chat_app.form.LoginForm;
 import in.tech_camp.chat_app.form.UserEditForm;
 import in.tech_camp.chat_app.form.UserForm;
 import in.tech_camp.chat_app.repository.UserRepository;
-import in.tech_camp.chat_app.service.UserService;
 import in.tech_camp.chat_app.validation.ValidationOrder;
 import lombok.AllArgsConstructor;
 
@@ -33,7 +32,6 @@ import lombok.AllArgsConstructor;
 public class UserController {
 
   private final UserRepository userRepository;
-  private final UserService userService;
 
   // サインアップ画面表示ルーティング
   @GetMapping("/users/sign_up")
