@@ -23,11 +23,6 @@ import in.tech_camp.chat_app.service.UserService;
 import in.tech_camp.chat_app.validation.ValidationOrder;
 import lombok.AllArgsConstructor;
 
-
-
-
-
-
 @Controller
 @AllArgsConstructor
 public class UserController {
@@ -57,6 +52,17 @@ public class UserController {
       model.addAttribute("errorMessages", errorMessages);
       model.addAttribute("userForm", userForm);
       return "users/signUp";
+    }
+    try {
+      UserEntity userEntity = new UserEntity();
+      userEntity.setName(userForm.getName());
+      userEntity.setEmail(userForm.getEmail());
+      userEntity.setPassword(userForm.getPassword());
+      userService.createUserWithEncryptedPassword(userEntity);
+    } catch (Exception e) {
+      System.out.println("エラー:" + e );
+      model.addAttribute("user",userForm);
+      return "users/edit";
     }
     return "redirect:/";
   }
