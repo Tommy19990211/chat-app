@@ -23,7 +23,7 @@ import lombok.AllArgsConstructor;
 public class MessageController {
   private final UserRepository userRepository; 
   private final RoomUserRepository roomUserRepository;
-  @GetMapping("/")
+  @GetMapping("message")
   public String showMessages(@AuthenticationPrincipal CustomUserDetail currentUser, Model model) {
     UserEntity userEntity = userRepository.findById(currentUser.getId());
     List<RoomUserEntity>roomUserEntity = roomUserRepository.findByUserId(currentUser.getId());
@@ -36,8 +36,5 @@ public class MessageController {
 
     return "messages/index";
   }
-
-  
-  
 
 }
