@@ -13,7 +13,7 @@
       <div th:each="room :${rooms}">
         <div class="room">
           <div class="room-name">
-            <a href="#" th:text="${room.name}"></a>
+            <a th:href="@{/rooms/{roomId}/messages(roomId=${room.id})}" th:text="${room.name}"></a>
           </div>
         </div>
       </div>
