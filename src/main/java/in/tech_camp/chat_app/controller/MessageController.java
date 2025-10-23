@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +26,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import in.tech_camp.chat_app.entity.MessageEntity;
 import in.tech_camp.chat_app.repository.MessageRepository;
 import in.tech_camp.chat_app.repository.RoomRepository;
+import in.tech_camp.chat_app.validation.ValidationOrder;
+
 
 
 
@@ -58,12 +62,16 @@ public class MessageController {
   }
 
   @PostMapping("/rooms/{roomId}/message")
-  public String postMethodName(@PathVariable Integer roomId,@AuthenticationPrincipal CustomUserDetail currentUser,  @ModelAttribute MessageForm messageForm) {
+  public String postMethodName(@PathVariable Integer roomId, @AuthenticationPrincipal CustomUserDetail currentUser,  @ModelAttribute @Validated(ValidationOrder.class) MessageForm messageForm
+  ,BindingResult bindingResult) {
+
+    if(bindingResult.hasErrors()){
+      return "redirect:/rooms/"+ roomId +"/messages";
+    }
+
     // 事前処理
     UserEntity userEntity = userRepository.findById(currentUser.getId());
     RoomEntity roomEntity = roomRepository.findById(roomId);
-    
-
     // メッセージ登録処理
     MessageEntity messageEntity = new MessageEntity();
     messageEntity.setUser(userEntity);
