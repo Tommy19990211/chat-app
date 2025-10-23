@@ -3,9 +3,7 @@
   <div th:fragment="main_chat">
     <div class="chat-header">
       <div class="left-header">
-        <div class="header-title">
-          hogefuga
-        </div>
+        <div class="header-title" th:text=${room.name}></div>
       </div>
       <div class="right-header">
         <div class="header-button">
@@ -18,14 +16,14 @@
       <div th:each="message :${messages}" class="message">
         <div class="upper-message">
           <div class="message-user" th:text="${message.user.name}"></div>
-          <div class="message-date" th:text="${message.createdAt}"></div>
+          <div class="message-date" th:text="${#dates.format(message.createdAt, 'yyyy/MM/dd HH:mm:ss')}">日付</div>
         </div>
         <div class="lower-message">
           <div class="message-content" th:text="${message.content}"></div>
         </div>
       </div>
     </div>
-    <form th:action="@{/rooms/{roomId}/message(roomId=${roomId})}" method="post" th:object="${messageForm}" class="form">
+    <form th:action="@{/rooms/{roomId}/message(roomId=${room.id})}" method="post" th:object="${messageForm}" class="form">
       <div class="form-input">
         <input class="form-message" placeholder= "type a message" th:field="*{content}"/>
         <label class="form-image">

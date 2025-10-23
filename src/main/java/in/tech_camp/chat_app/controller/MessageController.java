@@ -52,6 +52,8 @@ public class MessageController {
     model.addAttribute("roomId",roomId);
     //messagesリストをviewにバインド
     model.addAttribute("messages",messages);
+
+    model.addAttribute("room",roomRepository.findById(roomId));
     return "messages/index";
   }
 
