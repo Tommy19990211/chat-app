@@ -1,10 +1,13 @@
 package in.tech_camp.chat_app.entity;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
 public class RoomEntity {
   private Integer id;
   private String name;
-  private Integer roomUserId;
+  private List<RoomUserEntity> roomUsers;
+  private List<MessageEntity>messages;
 }
