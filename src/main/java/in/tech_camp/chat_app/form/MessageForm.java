@@ -1,12 +1,8 @@
 package in.tech_camp.chat_app.form;
 
-import java.util.function.BinaryOperator;
-
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
-import in.tech_camp.chat_app.validation.ValidationPriority1;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
