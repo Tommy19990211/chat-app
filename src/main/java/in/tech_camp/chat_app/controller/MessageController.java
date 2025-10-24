@@ -72,6 +72,8 @@ public class MessageController {
   public String postMethodName(@PathVariable Integer roomId, @AuthenticationPrincipal CustomUserDetail currentUser,  @ModelAttribute @Validated(ValidationOrder.class) MessageForm messageForm
   ,BindingResult bindingResult) {
 
+    messageForm.validationMessage(bindingResult);
+
     if(bindingResult.hasErrors()){
       return "redirect:/rooms/"+ roomId +"/messages";
     }
