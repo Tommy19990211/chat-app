@@ -19,3 +19,6 @@ gradle-app.setting
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+
+# 画像のアップロード先を除外
+src/main/resources/static/uploads/**
